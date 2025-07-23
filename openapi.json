@@ -1,0 +1,1471 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "shopping-cart Api Documentation",
+    "description": "shopping-cart Api Documentation",
+    "license": {
+      "name": "Specify your license",
+      "url": "https://yourlicense.com"
+    },
+    "x-logo": {
+      "url": "logo.png",
+      "description": "shopping-cart Logo",
+      "altText": "shopping-cart Logo",
+      "backgroundColor": "#483D8B"
+    },
+    "contact": {
+      "name": "shopping-cart API Support",
+      "url": "https://shopping_cart.com/info/support",
+      "email": "support@shopping_cart.com"
+    },
+    "termsOfService": "https://shopping_cart.com/info/terms_and_conditions"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8060/api",
+      "description": "Api base url"
+    }
+  ],
+  "paths": {
+    "/cart": {
+      "get": {
+        "summary": "List Cart",
+        "description": "Cart",
+        "operationId": "ListCart",
+        "tags": [
+          "Cart"
+        ],
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Filter table records by search value",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "$ref": "#/components/schemas/SearchQuery"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of records to select. Default 20",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "$ref": "#/components/schemas/LimitQuery"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Current page record",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "$ref": "#/components/schemas/PageNumberQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListCart"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unable to complete request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cart/view/{id}": {
+      "get": {
+        "summary": "View Cart",
+        "description": "Cart Details",
+        "operationId": "ViewCart",
+        "tags": [
+          "Cart"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Select record by ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "$ref": "#/components/schemas/RecordID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewCart"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unable to complete request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cart/add": {
+      "post": {
+        "summary": "Add Cart",
+        "description": "Add New Cart",
+        "operationId": "AddCart",
+        "tags": [
+          "Cart"
+        ],
+        "requestBody": {
+          "description": "Add Cart",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCart"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewCart"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unable to complete request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cart/edit/{id}": {
+      "put": {
+        "summary": "Edit Cart",
+        "description": "Edit Cart",
+        "operationId": "EditCart",
+        "tags": [
+          "Cart"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Select record by ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "$ref": "#/components/schemas/RecordID"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Edit Cart",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditCart"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EditCart"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unable to complete request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cart/delete/{id}": {
+      "delete": {
+        "summary": "Delete Cart",
+        "description": "Cart",
+        "operationId": "DeleteCart",
+        "tags": [
+          "Cart"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Select record by ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "$ref": "#/components/schemas/RecordID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unable to complete request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders": {
+      "get": {
+        "summary": "List Orders",
+        "description": "Orders",
+        "operationId": "ListOrders",
+        "tags": [
+          "Orders"
+        ],
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Filter table records by search value",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "$ref": "#/components/schemas/SearchQuery"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of records to select. Default 20",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "$ref": "#/components/schemas/LimitQuery"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Current page record",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "$ref": "#/components/schemas/PageNumberQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOrders"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unable to complete request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders/view/{id}": {
+      "get": {
+        "summary": "View Orders",
+        "description": "Order Details",
+        "operationId": "ViewOrders",
+        "tags": [
+          "Orders"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Select record by ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "$ref": "#/components/schemas/RecordID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewOrders"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unable to complete request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders/add": {
+      "post": {
+        "summary": "Add Orders",
+        "description": "Add New Order",
+        "operationId": "AddOrders",
+        "tags": [
+          "Orders"
+        ],
+        "requestBody": {
+          "description": "Add Orders",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddOrders"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewOrders"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unable to complete request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders/edit/{id}": {
+      "put": {
+        "summary": "Edit Orders",
+        "description": "Edit Order",
+        "operationId": "EditOrders",
+        "tags": [
+          "Orders"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Select record by ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "$ref": "#/components/schemas/RecordID"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Edit Orders",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditOrders"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EditOrders"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unable to complete request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders/delete/{id}": {
+      "delete": {
+        "summary": "Delete Orders",
+        "description": "Orders",
+        "operationId": "DeleteOrders",
+        "tags": [
+          "Orders"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Select record by ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "$ref": "#/components/schemas/RecordID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unable to complete request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "summary": "List Products",
+        "description": "Products",
+        "operationId": "ListProducts",
+        "tags": [
+          "Products"
+        ],
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Filter table records by search value",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "$ref": "#/components/schemas/SearchQuery"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of records to select. Default 20",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "$ref": "#/components/schemas/LimitQuery"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Current page record",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "$ref": "#/components/schemas/PageNumberQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListProducts"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unable to complete request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/view/{id}": {
+      "get": {
+        "summary": "View Products",
+        "description": "Product Details",
+        "operationId": "ViewProducts",
+        "tags": [
+          "Products"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Select record by ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "$ref": "#/components/schemas/RecordID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewProducts"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unable to complete request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/add": {
+      "post": {
+        "summary": "Add Products",
+        "description": "Add New Product",
+        "operationId": "AddProducts",
+        "tags": [
+          "Products"
+        ],
+        "requestBody": {
+          "description": "Add Products",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddProducts"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewProducts"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unable to complete request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/edit/{id}": {
+      "put": {
+        "summary": "Edit Products",
+        "description": "Edit Product",
+        "operationId": "EditProducts",
+        "tags": [
+          "Products"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Select record by ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "$ref": "#/components/schemas/RecordID"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Edit Products",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditProducts"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EditProducts"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unable to complete request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/delete/{id}": {
+      "delete": {
+        "summary": "Delete Products",
+        "description": "Products",
+        "operationId": "DeleteProducts",
+        "tags": [
+          "Products"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Select record by ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "$ref": "#/components/schemas/RecordID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unable to complete request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "summary": "List Users",
+        "description": "Users",
+        "operationId": "ListUsers",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Filter table records by search value",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "$ref": "#/components/schemas/SearchQuery"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of records to select. Default 20",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "$ref": "#/components/schemas/LimitQuery"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Current page record",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "$ref": "#/components/schemas/PageNumberQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListUsers"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unable to complete request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/view/{id}": {
+      "get": {
+        "summary": "View Users",
+        "description": "User Details",
+        "operationId": "ViewUsers",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Select record by ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "$ref": "#/components/schemas/RecordID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewUsers"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unable to complete request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/add": {
+      "post": {
+        "summary": "Add Users",
+        "description": "Add New User",
+        "operationId": "AddUsers",
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "description": "Add Users",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddUsers"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewUsers"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unable to complete request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/edit/{id}": {
+      "put": {
+        "summary": "Edit Users",
+        "description": "Edit User",
+        "operationId": "EditUsers",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Select record by ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "$ref": "#/components/schemas/RecordID"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Edit Users",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditUsers"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EditUsers"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unable to complete request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/delete/{id}": {
+      "delete": {
+        "summary": "Delete Users",
+        "description": "Users",
+        "operationId": "DeleteUsers",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Select record by ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "$ref": "#/components/schemas/RecordID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unable to complete request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ListCart": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Id",
+            "type": "string"
+          },
+          "user_id": {
+            "description": "User Id",
+            "type": "string"
+          },
+          "variant_id": {
+            "description": "Variant Id",
+            "type": "string"
+          },
+          "quantity": {
+            "description": "Quantity",
+            "type": "string"
+          }
+        }
+      },
+      "ViewCart": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Id",
+            "type": "string"
+          },
+          "user_id": {
+            "description": "User Id",
+            "type": "string"
+          },
+          "variant_id": {
+            "description": "Variant Id",
+            "type": "string"
+          },
+          "quantity": {
+            "description": "Quantity",
+            "type": "string"
+          }
+        }
+      },
+      "AddCart": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "description": "User Id",
+            "type": "string"
+          },
+          "variant_id": {
+            "description": "Variant Id",
+            "type": "string"
+          },
+          "quantity": {
+            "description": "Quantity",
+            "type": "string"
+          }
+        }
+      },
+      "EditCart": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "description": "User Id",
+            "type": "string"
+          },
+          "variant_id": {
+            "description": "Variant Id",
+            "type": "string"
+          },
+          "quantity": {
+            "description": "Quantity",
+            "type": "string"
+          }
+        }
+      },
+      "ListOrders": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Id",
+            "type": "string"
+          },
+          "user_id": {
+            "description": "User Id",
+            "type": "string"
+          },
+          "order_date": {
+            "description": "Order Date",
+            "type": "string"
+          },
+          "total": {
+            "description": "Total",
+            "type": "string"
+          }
+        }
+      },
+      "ViewOrders": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Id",
+            "type": "string"
+          },
+          "user_id": {
+            "description": "User Id",
+            "type": "string"
+          },
+          "order_date": {
+            "description": "Order Date",
+            "type": "string"
+          },
+          "total": {
+            "description": "Total",
+            "type": "string"
+          }
+        }
+      },
+      "AddOrders": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "description": "User Id",
+            "type": "string"
+          },
+          "order_date": {
+            "description": "Order Date",
+            "type": "string"
+          },
+          "total": {
+            "description": "Total",
+            "type": "string"
+          }
+        }
+      },
+      "EditOrders": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "description": "User Id",
+            "type": "string"
+          },
+          "order_date": {
+            "description": "Order Date",
+            "type": "string"
+          },
+          "total": {
+            "description": "Total",
+            "type": "string"
+          }
+        }
+      },
+      "ListProducts": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Id",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name",
+            "type": "string"
+          },
+          "description": {
+            "description": "Description",
+            "type": "string"
+          },
+          "price": {
+            "description": "Price",
+            "type": "string"
+          },
+          "category": {
+            "description": "Category",
+            "type": "string"
+          },
+          "stock": {
+            "description": "Stock",
+            "type": "string"
+          },
+          "image_url": {
+            "description": "Image Url",
+            "type": "string"
+          }
+        }
+      },
+      "ViewProducts": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Id",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name",
+            "type": "string"
+          },
+          "description": {
+            "description": "Description",
+            "type": "string"
+          },
+          "price": {
+            "description": "Price",
+            "type": "string"
+          },
+          "category": {
+            "description": "Category",
+            "type": "string"
+          },
+          "stock": {
+            "description": "Stock",
+            "type": "string"
+          },
+          "image_url": {
+            "description": "Image Url",
+            "type": "string"
+          }
+        }
+      },
+      "AddProducts": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Name",
+            "type": "string"
+          },
+          "description": {
+            "description": "Description",
+            "type": "string"
+          },
+          "price": {
+            "description": "Price",
+            "type": "string"
+          },
+          "category": {
+            "description": "Category",
+            "type": "string"
+          },
+          "stock": {
+            "description": "Stock",
+            "type": "string"
+          },
+          "image_url": {
+            "description": "Image Url",
+            "type": "string"
+          }
+        }
+      },
+      "EditProducts": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Name",
+            "type": "string"
+          },
+          "description": {
+            "description": "Description",
+            "type": "string"
+          },
+          "price": {
+            "description": "Price",
+            "type": "string"
+          },
+          "category": {
+            "description": "Category",
+            "type": "string"
+          },
+          "stock": {
+            "description": "Stock",
+            "type": "string"
+          },
+          "image_url": {
+            "description": "Image Url",
+            "type": "string"
+          }
+        }
+      },
+      "ListUsers": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Id",
+            "type": "string"
+          },
+          "username": {
+            "description": "Username",
+            "type": "string"
+          },
+          "email": {
+            "description": "Email",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name",
+            "type": "string"
+          },
+          "phone": {
+            "description": "Phone",
+            "type": "string"
+          },
+          "address": {
+            "description": "Address",
+            "type": "string"
+          },
+          "image_url": {
+            "description": "Image Url",
+            "type": "string"
+          }
+        }
+      },
+      "ViewUsers": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Id",
+            "type": "string"
+          },
+          "username": {
+            "description": "Username",
+            "type": "string"
+          },
+          "email": {
+            "description": "Email",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name",
+            "type": "string"
+          },
+          "phone": {
+            "description": "Phone",
+            "type": "string"
+          },
+          "address": {
+            "description": "Address",
+            "type": "string"
+          },
+          "image_url": {
+            "description": "Image Url",
+            "type": "string"
+          }
+        }
+      },
+      "AddUsers": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "description": "Username",
+            "type": "string"
+          },
+          "email": {
+            "description": "Email",
+            "type": "string"
+          },
+          "password": {
+            "description": "Password",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name",
+            "type": "string"
+          },
+          "phone": {
+            "description": "Phone",
+            "type": "string"
+          },
+          "address": {
+            "description": "Address",
+            "type": "string"
+          },
+          "image_url": {
+            "description": "Image Url",
+            "type": "string"
+          }
+        }
+      },
+      "EditUsers": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "description": "Username",
+            "type": "string"
+          },
+          "email": {
+            "description": "Email",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name",
+            "type": "string"
+          },
+          "phone": {
+            "description": "Phone",
+            "type": "string"
+          },
+          "address": {
+            "description": "Address",
+            "type": "string"
+          },
+          "image_url": {
+            "description": "Image Url",
+            "type": "string"
+          }
+        }
+      },
+      "SearchQuery": {
+        "type": "string"
+      },
+      "OrderByQuery": {
+        "type": "string"
+      },
+      "OrderTypeQuery": {
+        "type": "string"
+      },
+      "LimitQuery": {
+        "type": "integer"
+      },
+      "PageNumberQuery": {
+        "type": "integer"
+      },
+      "RecordID": {
+        "type": "string"
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Http Status Code",
+            "type": "integer"
+          },
+          "message": {
+            "description": "Unable to complete request",
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
